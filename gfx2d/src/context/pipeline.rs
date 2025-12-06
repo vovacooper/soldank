@@ -2,13 +2,13 @@ use super::*;
 
 #[rustfmt::skip]
 pub const VERT_SOURCE: &str =
-r#"#version 120
+r#"#version 150 core
     uniform mat4 transform;
-    attribute vec2 in_position;
-    attribute vec2 in_texcoords;
-    attribute vec4 in_color;
-    varying vec2 texcoords;
-    varying vec4 color;
+    in vec2 in_position;
+    in vec2 in_texcoords;
+    in vec4 in_color;
+    out vec2 texcoords;
+    out vec4 color;
 
     void main() {
         vec4 clr_f = in_color / 255.0;
@@ -20,13 +20,14 @@ r#"#version 120
 
 #[rustfmt::skip]
 pub const FRAG_SOURCE: &str =
-r#"#version 120
-    varying vec2 texcoords;
-    varying vec4 color;
+r#"#version 150 core
+    in vec2 texcoords;
+    in vec4 color;
     uniform sampler2D sampler;
+    out vec4 frag_color;
 
     void main() {
-        gl_FragColor = texture2D(sampler, texcoords) * color;
+        frag_color = texture(sampler, texcoords) * color;
     }
 "#;
 

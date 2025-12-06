@@ -87,7 +87,7 @@ impl GameGraphics {
         let zoom = f32::exp(camera.zoom);
         let (w, h) = (zoom * GAME_WIDTH, zoom * GAME_HEIGHT);
         let mut cam = *camera_position;
-        cam += camera.offset;
+        // cam += camera.offset;
         if camera.centered {
             cam -= vec2(w / 2.0, h / 2.0);
         }
